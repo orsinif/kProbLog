@@ -1,0 +1,22 @@
+:- declare(a/1, term).
+:- declare(b/2, term).
+:- declare(c/2, term).
+:- declare(d/1, term).
+:- declare(z/0, term).
+:- declare(k/0, term).
+:- declare(q/2, term).
+
+label0::a(pluto).
+b(pluto, topolino).
+c(pluto, minnie).
+c(topolino, paperino).
+label1::d(X):- c(_, X).
+z.
+k.
+3*label2(X)::q(X,Z) :-
+    @f(a(X),b(X,Y)),
+    z,
+    c(Y,Z),
+    @g(d(Z)).
+
+query(q(_,_)).

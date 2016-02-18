@@ -1,0 +1,43 @@
+
+:- declare(edge_asymm/3, boolean).
+:- declare(edge/3, polynomial(int)).
+:- declare(vertex/2, polynomial(int)).
+:- declare(wl_color/3, polynomial(int)).
+:- declare(wl_color_multiset/3, polynomial(int)).
+
+% VERTEX LABELS EXPRESSED USING POLYNOMIALS
+1 * x(pink)::vertex(graph_a, 1).
+1 * x(blue)::vertex(graph_a, 2).
+1 * x(blue)::vertex(graph_a, 3).
+1 * x(blue)::vertex(graph_a, 4).
+1 * x(blue)::vertex(graph_a, 5).
+
+% GRAPH CONNECTIVITY
+edge_asymm(graph_a, 1, 2).
+edge_asymm(graph_a, 1, 3).
+edge_asymm(graph_a, 2, 4).
+edge_asymm(graph_a, 3, 4).
+edge_asymm(graph_a, 4, 5).
+
+% SYMMETRIC CLOSURE OF THE GRAPH CONNECTIVITY
+1.0::edge(Graph, A, B):-
+    edge_asymm(Graph, A, B).
+
+1.0::edge(Graph, A, B):-
+    edge_asymm(Graph, B, A).
+
+wl_color(0, Graph, V):-
+    vertex(Graph, V).
+
+% AGGREGATES THE COLORS OF THE NEIGHBORS
+wl_color_multiset(H, Graph, V):-
+    edge(Graph, V, W),
+    wl_color(H, Graph, W).
+
+wl_color(H, Graph, V):-
+    H > 0,
+    H1 is H - 1,
+    @id(wl_color_multiset(H1, Graph, V)). % COMPRESSION FUNCTION
+
+
+query(wl_color(1,_,_)).

@@ -1,0 +1,16 @@
+:- declare (l/0, float).
+:- declare (p/1, float, destructive).
+
+0.3::p(a).
+0.3::p(b).
+0.3::l.
+0.01::p(f).
+
+0.1::p(a) :- l, p(b).
+2.0::p(b) :- p(c).
+0.2::p(c) :- p(a).
+0.3::p(c) :- p(d).
+0.4::p(d) :- p(e).
+0.5::p(e) :- p(f).
+0.5::p(g) :- @sqrt[p(a)].
+

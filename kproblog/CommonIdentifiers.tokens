@@ -1,0 +1,15 @@
+PLUS=1
+MINUS=2
+TIMES=3
+DIV=4
+POW=5
+CONST_ID=6
+VAR_ID=7
+INT_ID=8
+FLOAT_ID=9
+WS=10
+'+'=1
+'-'=2
+'*'=3
+'/'=4
+'^'=5

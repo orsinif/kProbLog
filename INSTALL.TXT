@@ -1,0 +1,25 @@
+kProlog was developed under OSX and ran on Ubuntu/Linux on the Anaconda 2 (64-bit) Python distribution.
+
+Install ProbLog 2.1.0.7 as dependency.
+$ pip install problog==2.1.0.7
+
+Make sure that also SDDs are installed.
+Enter the python interpreter
+$ python
+
+and type the following commands
+
+>>> import problog
+>>> problog.setup.install()
+running build_ext
+{'sdd_module': True, 'python_version': sys.version_info(major=2, minor=7, micro=11, releaselevel='final', serial=0), 'root_path': '/Users/francesco/anaconda/lib/python2.7/site-packages/problog/..', 'dsharp': True, 'c2d': False, 'pyparsing': '1.5.6', 'os': 'darwin'}
+>>> exit()
+
+Now you can run the kProlog scripts from the shell perhaps:
+
+$ python run_linear_system.py 
+
+
+
+
+

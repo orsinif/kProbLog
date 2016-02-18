@@ -1,0 +1,27 @@
+:- declare(edge_asymm/2, tropical).
+:- declare(edge/2, tropical).
+:- declare(path/2, tropical, additive).
+:- declare(range/3, boolean).
+:- declare('=<'/2, boolean).
+:- declare('is'/2, boolean).
+
+range(Start, Start, End):-
+    Start =< End.
+
+range(X, Start, End):-
+    Start =< End,
+    Start1 is Start + 1,
+    range(X, Start1, End).
+
+0::edge_asymm(X, X):- range(X, 0, 2).
+
+1::edge_asymm(0, 1).
+1::edge_asymm(1, 2).
+
+edge(X, Y):- edge_asymm(X, Y).
+edge(X, Y):- edge_asymm(Y, X).
+
+path(X, Y):- edge(X, Y).
+path(X, Y):- edge(X, Z), path(Z, Y).
+
+query(path(_,_)).

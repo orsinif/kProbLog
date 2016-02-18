@@ -1,0 +1,15 @@
+% this is a comment
+
+:- declare(p/2, float_expr).
+:- declare(q/0, float_expr).
+:- declare(r/0, float_expr).
+
+% 0.3^2+0.01::p(1, a).
+@square[0.3]+0.01::p(1, a).
+
+5^3*3+3^2*2::p(1, b).
+
+q:- p(1, a).
+q:- p(1, b).
+
+r :- p(1, a), p(1, b).

@@ -1,0 +1,33 @@
+
+:- declare(a/2, real).
+:- declare(b/1, real).
+    
+:- declare(diag/2, real).
+:- declare(r/2, real).
+:- declare(e/2, real).
+:- declare(x/1, real, destructive).
+:- declare(aux/1, real, destructive).
+    
+7.0::a(0,0).    
+1.0::a(0,1).    
+5.0::a(1,0).    
+8.0::a(1,1).    
+
+1.0::b(0).
+6.0::b(1).
+        
+diag(I, I):- a(I, I).
+r(I, J):- a(I, J), I \= J.
+    
+e(I, I):- @invert(diag(I, I)).
+
+0::x(0).
+0::x(1).
+
+0::aux(0).
+0::aux(1).
+x(I):- e(I, K), @subtraction(b(K), aux(K)).
+
+aux(K):- r(K, L), x(L).
+
+query(x(_)).

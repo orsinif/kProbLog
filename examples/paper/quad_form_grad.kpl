@@ -1,0 +1,38 @@
+:- declare(x/1, grad).
+:- declare(x0/1, float).
+:- declare(a/2, float).
+:- declare(dim/1, term).
+:- declare(f/0, grad).
+:- declare(grad_f/1, float).
+
+range(Start, Start, End):-
+    Start < End.
+
+range(I, Start, End):-
+    Start < End,
+    Start1 is Start + 1,
+    range(I, Start1, End),
+    I < End.
+
+2::a(0, 0).
+1::a(0, 1).
+6::a(1, 0).
+3::a(1, 1).
+
+2::x0(0).
+1::x0(1).
+
+x(I):- x0(I).
+eps(I)::x(I):- range(I, 0, 2).
+
+f :-
+  a(I, J), x(I), x(J).
+
+eps(Dim)::dim(Dim):-
+  range(Dim, 0, 2).
+
+grad_f(I):-
+  range(I, 0, 2),
+  @grad(f, dim(I)).
+
+query(grad_f(_)).

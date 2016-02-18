@@ -1,0 +1,10 @@
+:- declare(p/1, prob_sdd).
+
+0.5::p(a).
+0.6::p(b).
+
+p(c) :- p(a), p(b).
+p(d) :- p(a).
+p(d) :- p(b).
+
+

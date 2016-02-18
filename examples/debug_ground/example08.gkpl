@@ -1,0 +1,13 @@
+:- declare(q/2, term).
+:- declare(a/1, term).
+:- declare(b/2, term).
+:- declare(z/0, term).
+:- declare(c/2, term).
+:- declare(d/1, term).
+
+'*'(3,label2(pluto))::q(pluto,paperino) :- @f[a(pluto), b(pluto,topolino)], z, c(topolino,paperino), @g[d(paperino)].
+label1::d(paperino) :- c(topolino,paperino).
+label0::a(pluto).
+b(pluto,topolino).
+z.
+c(topolino,paperino).

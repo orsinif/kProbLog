@@ -1,0 +1,43 @@
+:- declare(edge_asymm/2, boolean).
+:- declare(edge/2, polynomial(int)).
+:- declare(vertex/1, polynomial(int)).
+:- declare(wl_color/2, polynomial(int)).
+:- declare(wl_color_multiset/2, polynomial(int)).
+:- declare(wl_feature/1, polynomial(int)).
+:- declare(sv_feature/0, string).
+:- declare(max_feat_hash/0, int).
+
+131071::max_feat_hash.
+
+{graph_data}
+
+1::edge(X, Y):- edge_asymm(X, Y).
+1::edge(X, Y):- edge_asymm(Y, X).
+
+wl_color(0, V):-
+    vertex(V).
+
+% AGGREGATES THE COLORS OF THE NEIGHBORS
+wl_color_multiset(H, V):-
+    edge(V, W), wl_color(H, W).
+
+wl_color(H, V):-
+    H > 0, H1 is H - 1,
+    @id(wl_color_multiset(H1, V)). % COMPRESSION FUNCTION
+
+wl_feature(0):-
+    wl_color(0, V).
+
+wl_feature(H):-
+    H > 0,
+    wl_color(H, V).
+
+wl_feature(H):-
+    H > 0, H1 is H - 1,
+    wl_feature(H1).
+
+sv_feature:-
+    @sv_feature(wl_feature(1), max_feat_hash).
+
+query(sv_feature).
+
